@@ -1,2 +1,36 @@
-<app-destino-viaje *ngFor="let destino of this.destinos" [nombre]="destino"></app-destino-viaje>
+<!-- <app-destino-viaje *ngFor="let destino of this.destinos" [nombre]="destino"></app-destino-viaje> -->
 
+<div class="container benefits">
+    <ul class="row">
+        <li class="col-6" *ngFor="let aux of paises">
+            {{aux}}
+        </li>
+    </ul>
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <span class="anchor" id="formLogin"></span>
+            <div class="card card-outline-secondary">
+                <div class="card-header">
+                    <h3 class="mb-0">Lista de deseos</h3>
+                </div>
+                <div class="card-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="nombre">Nombre</label>
+                            <input #nombre type="text" class="form-control" id="nombre" placeholder="Ingresar nombre...">
+                        </div>
+                        <div class="form-group">
+                            <label for="Imagen Url">Imagen Url</label>
+                            <input #url type="text" class="form-control" id="imagenUrl" placeholder="Ingresar url...">
+                        </div>
+                        <button type="submit" class="btn btn-primary" (click)="guardar(nombre.value,url.value)">Guardar!</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr class="mb-5">
+    <div class="row flex">
+        <app-destino-viaje *ngFor="let aux of destinos" [destino]="aux"></app-destino-viaje>
+    </div>
+</div>
