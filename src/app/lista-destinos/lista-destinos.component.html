@@ -31,6 +31,6 @@
     </div>
     <hr class="mb-5">
     <div class="row flex">
-        <app-destino-viaje *ngFor="let aux of destinos" [destino]="aux"></app-destino-viaje>
+        <app-destino-viaje *ngFor="let aux of destinos" [destino]="aux" (clicked)="elegido(aux)"></app-destino-viaje>
     </div>
 </div>
