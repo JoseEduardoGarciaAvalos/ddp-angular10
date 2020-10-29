@@ -17,9 +17,15 @@
     <hr class="mb-5">
     <div class="row flex">
         <app-destino-viaje 
-        *ngFor="let aux of destinos; index as i" 
+        *ngFor="let aux of destinoApiClient.getAll(); index as i" 
         [destino]="aux" 
         [idx]="i+1" 
         (clicked)="elegido(aux)"></app-destino-viaje>
+    </div>
+    <div class="row flex">
+        <h5>Actividad</h5>
+        <ul>
+            <li *ngFor="let u of updates">{{u}}</li>
+        </ul>
     </div>
 </div>
