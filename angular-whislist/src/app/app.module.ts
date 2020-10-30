@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { InjectionToken, NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule} from "@angular/forms";
 
@@ -21,6 +21,8 @@ import { VuelosMainComponent } from './components/vuelos/vuelos-main/vuelos-main
 import { VuelosInfoComponent } from './components/vuelos/vuelos-info/vuelos-info.component';
 import { VuelosDetalleComponent } from './components/vuelos/vuelos-detalle/vuelos-detalle.component';
 import { ReservasModule } from './reservas/reservas.module';
+import { APP_CONFIG, APP_CONFIG_VALUE } from './app.config2';
+
 
 export const childrenVuelos: Routes = [
   {path: "", redirectTo: "main", pathMatch:"full"},
@@ -72,7 +74,9 @@ export const reducers = {
     EffectsModule.forRoot([NgRx.Effects]),
     ReservasModule
   ],
-  providers: [AuthService, UsuarioLogueadoGuard],
+  providers: [AuthService, UsuarioLogueadoGuard,
+    {provide: APP_CONFIG, useValue: APP_CONFIG_VALUE},
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,9 +1,10 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, forwardRef, Inject, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { fromEvent } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map, switchMap } from "rxjs/operators";
 import { ajax } from "rxjs/ajax";
 import { DestinoViaje } from '../../models/destino-viaje.models';
+import { APP_CONFIG, AppConfig} from "src/app/app.config2";
 
 @Component({
   selector: 'app-form-destino-viaje',
@@ -16,7 +17,8 @@ export class FormDestinoViajeComponent implements OnInit {
   minLongitud = 3;
   searchResult: string[] = [];
 
-  constructor(fb: FormBuilder) {
+  // Angular siempre detectaba que habían dependencias cirulares, por lo tanto se creó un archivo intermediario
+  constructor(fb: FormBuilder, @Inject(forwardRef(() => APP_CONFIG)) private config: AppConfig) {
     this.fg = fb.group({
       nombre: ['', Validators.compose([
         Validators.required,
@@ -37,7 +39,7 @@ export class FormDestinoViajeComponent implements OnInit {
       filter( txt => txt.length > 2),
       debounceTime(200),
       distinctUntilChanged(),
-      switchMap((txt) => ajax("assets/datos.json")),
+      switchMap((txt) => ajax(this.config.apiEndpoint + "/ciudades?q=" + txt)),
     ).subscribe( ajaxResponse => {
       this.searchResult = ajaxResponse.response;
     });
