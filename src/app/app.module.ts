@@ -16,6 +16,10 @@ import { LoginComponent } from './components/login/login/login.component';
 import { ProtectedComponent } from './components/protected/protected/protected.component';
 import { UsuarioLogueadoGuard } from './guards/usuario-logueado/usuario-logueado.guard';
 import { AuthService } from './services/auth.service';
+import { VuelosComponent } from './components/vuelos/vuelos/vuelos.component';
+import { VuelosMainComponent } from './components/vuelos/vuelos-main/vuelos-main.component';
+import { VuelosInfoComponent } from './components/vuelos/vuelos-info/vuelos-info.component';
+import { VuelosDetalleComponent } from './components/vuelos/vuelos-detalle/vuelos-detalle.component';
 
 const routes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full"},
@@ -40,7 +44,11 @@ export const reducers = {
     DestinoDetalleComponent,
     FormDestinoViajeComponent,
     LoginComponent,
-    ProtectedComponent
+    ProtectedComponent,
+    VuelosComponent,
+    VuelosMainComponent,
+    VuelosInfoComponent,
+    VuelosDetalleComponent
   ],
   imports: [
     BrowserModule,
