@@ -1,1 +1,13 @@
-<p>login works!</p>
+<form class="form-inline" *ngIf="!authService.getUser()">
+    <div class="form-group">
+        <label  for="username">Usuario: </label>
+        <input type="text" class="form-control m-2" name="username" #user>
+    </div>
+    <div class="form-group">
+        <label for="password">Contraseña: </label>
+        <input type="password" class="form-control m-2" name="password" #pass>
+    </div>
+    <a href="#" class="btn btn-success" (click)="login(user.value,pass.value)">Entrar</a>
+    {{mensajeError}}
+</form>
+<a href="#" class="btn btn-success" (click)="logout()" *ngIf="authService.getUser()">Salir</a>

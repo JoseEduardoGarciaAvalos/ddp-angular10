@@ -14,11 +14,15 @@ import { StoreModule } from '@ngrx/store';
 import  * as NgRx from './models/destino-viajes-state.model';
 import { LoginComponent } from './components/login/login/login.component';
 import { ProtectedComponent } from './components/protected/protected/protected.component';
+import { UsuarioLogueadoGuard } from './guards/usuario-logueado/usuario-logueado.guard';
+import { AuthService } from './services/auth.service';
 
 const routes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full"},
   { path: "home", component: ListaDestinosComponent},
-  { path: "destino", component: DestinoDetalleComponent},
+  { path: "destino/:id", component: DestinoDetalleComponent},
+  { path: "login", component: LoginComponent},
+  { path: "protected", component: ProtectedComponent, canActivate: [UsuarioLogueadoGuard]}
 ];
 export interface AppState {
   estado: NgRx.Estado
@@ -46,7 +50,7 @@ export const reducers = {
     StoreModule.forRoot(reducers),
     EffectsModule.forRoot([NgRx.Effects])
   ],
-  providers: [DestinoApiClient],
+  providers: [DestinoApiClient, AuthService, UsuarioLogueadoGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
