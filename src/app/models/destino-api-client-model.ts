@@ -2,7 +2,9 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { DestinoViaje } from './destino-viaje.models';
 import { Store } from '@ngrx/store';
 import { AppState } from '../app.module';
+import { Injectable } from '@angular/core';
 
+@Injectable()
 export class DestinoApiClient {
     private destinos:DestinoViaje[] = [];
     current: Subject<DestinoViaje> = new BehaviorSubject<DestinoViaje>(null);
