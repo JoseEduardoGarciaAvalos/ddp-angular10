@@ -16,10 +16,20 @@
                 </span>
             </li>
         </ul>
-        <a href="#" class="btn-card" (click)="ir()">Ir!</a>
-        <span *ngIf="destino.isSeleccionado()">
-            <span ngNonBindable>{{PREFERIDO}}</span>
-        </span>
-        <a [routerLink]="['/destino']">Destino</a>
+        <div class="row">
+            <a class="col-l-5 btn-card m-1" (click)="ir()">Favorito</a>
+            <a class="col-l-5 btn-card m-1" [routerLink]="['/destino']">Ir Destino</a>
+            <span class="p-3" *ngIf="destino.isSeleccionado()">
+                <span ngNonBindable>{{PREFERIDO}}</span>
+            </span>
+        </div>
+        <div class="row">
+            <a class="col-l-5 btn-card m-1" (click)="votar(1)">Me gusta</a>
+            <a class="col-l-5 btn-card m-1" (click)="votar(-1)">No gusta</a>
+            <span class="p-3"> Votos {{destino.voto}}</span>
+        </div>
+        <div class="row">
+            <a class="col-l-5 btn-card m-1" (click)="eliminar()">Eliminar</a>
+        </div>
     </div>
 </div>

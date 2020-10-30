@@ -26,7 +26,7 @@ export class FormDestinoViajeComponent implements OnInit {
       url: ['']
     });
     this.fg.valueChanges.subscribe( (form) => {
-      console.log("cambio en el formulario: ", form);
+      //console.log("cambio en el formulario: ", form);
     })
    }
 

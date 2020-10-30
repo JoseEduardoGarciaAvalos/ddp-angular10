@@ -10,7 +10,9 @@ export class DestinoViajeComponent implements OnInit {
   @Input() destino: DestinoViaje;
   @Input("idx") posicion: number;
   @Output() clicked: EventEmitter<DestinoViaje> = new EventEmitter<DestinoViaje>();
-  @HostBinding('attr.class') cssClass = "col-md-4";
+  @Output() eliminando: EventEmitter<DestinoViaje> = new EventEmitter<DestinoViaje>();
+  @Output() voto: EventEmitter<number> = new EventEmitter<number>();
+  @HostBinding('attr.class') cssClass = "col-md-6";
 
   constructor() { 
     //this.nombre = "Nombre por defecto";
@@ -21,6 +23,15 @@ export class DestinoViajeComponent implements OnInit {
 
   ir(){
     this.clicked.emit(this.destino);
+    return false;
+  }
+  eliminar(){
+    this.eliminando.emit(this.destino);
+    return false;
+  }
+
+  votar(val:number){
+    this.voto.emit(val);
     return false;
   }
 

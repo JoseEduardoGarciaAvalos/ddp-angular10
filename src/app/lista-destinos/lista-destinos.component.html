@@ -17,14 +17,17 @@
     <hr class="mb-5">
     <div class="row flex">
         <app-destino-viaje 
-        *ngFor="let aux of destinoApiClient.getAll(); index as i" 
-        [destino]="aux" 
+        *ngFor="let viaje of viajes; index as i" 
+        [destino]="viaje" 
         [idx]="i+1" 
-        (clicked)="elegido(aux)"></app-destino-viaje>
+        (voto)="votado(viaje,$event)"
+        (eliminando)="eliminado(viaje)"
+        (clicked)="elegido(viaje)"></app-destino-viaje>
     </div>
-    <div class="row flex">
-        <h5>Actividad</h5>
-        <ul>
+    <hr class="mb-1">
+    <div class="row">
+        <h5 class="col-12">Actividad:</h5>
+        <ul class="col-12">
             <li *ngFor="let u of updates">{{u}}</li>
         </ul>
     </div>

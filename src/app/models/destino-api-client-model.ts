@@ -1,18 +1,20 @@
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { DestinoViaje } from './destino-viaje.models';
+import { Store } from '@ngrx/store';
+import { AppState } from '../app.module';
 
 export class DestinoApiClient {
     private destinos:DestinoViaje[] = [];
     current: Subject<DestinoViaje> = new BehaviorSubject<DestinoViaje>(null);
 
-    constructor(){}
+    constructor(private store: Store<AppState>){}
 
     add(d:DestinoViaje){
         this.destinos.push(d);
     }
 
-    getAll():DestinoViaje[]{
-        return this.destinos;
+    getAll(){
+        return this.store.select(state => state.estado.destinos);
     }
 
     getById(id:String): DestinoViaje {
