@@ -20,6 +20,7 @@ import { VuelosComponent } from './components/vuelos/vuelos/vuelos.component';
 import { VuelosMainComponent } from './components/vuelos/vuelos-main/vuelos-main.component';
 import { VuelosInfoComponent } from './components/vuelos/vuelos-info/vuelos-info.component';
 import { VuelosDetalleComponent } from './components/vuelos/vuelos-detalle/vuelos-detalle.component';
+import { ReservasModule } from './reservas/reservas.module';
 
 export const childrenVuelos: Routes = [
   {path: "", redirectTo: "main", pathMatch:"full"},
@@ -68,7 +69,8 @@ export const reducers = {
     ReactiveFormsModule,
     RouterModule.forRoot(routes),
     StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([NgRx.Effects])
+    EffectsModule.forRoot([NgRx.Effects]),
+    ReservasModule
   ],
   providers: [DestinoApiClient, AuthService, UsuarioLogueadoGuard],
   bootstrap: [AppComponent]
