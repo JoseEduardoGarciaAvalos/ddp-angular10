@@ -21,12 +21,24 @@ import { VuelosMainComponent } from './components/vuelos/vuelos-main/vuelos-main
 import { VuelosInfoComponent } from './components/vuelos/vuelos-info/vuelos-info.component';
 import { VuelosDetalleComponent } from './components/vuelos/vuelos-detalle/vuelos-detalle.component';
 
+export const childrenVuelos: Routes = [
+  {path: "", redirectTo: "main", pathMatch:"full"},
+  {path:"main", component: VuelosMainComponent},
+  {path:"mas-info", component: VuelosInfoComponent},
+  {path:":id", component: VuelosDetalleComponent},
+];
+
 const routes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full"},
   { path: "home", component: ListaDestinosComponent},
   { path: "destino/:id", component: DestinoDetalleComponent},
   { path: "login", component: LoginComponent},
-  { path: "protected", component: ProtectedComponent, canActivate: [UsuarioLogueadoGuard]}
+  { path: "protected", component: ProtectedComponent, canActivate: [UsuarioLogueadoGuard]},
+  { path: "vuelos", component: VuelosComponent, canActivate: [UsuarioLogueadoGuard],
+    children: childrenVuelos
+  },
+  {path: "**",  redirectTo: "home"}
+
 ];
 export interface AppState {
   estado: NgRx.Estado
