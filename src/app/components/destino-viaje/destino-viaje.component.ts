@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, HostBinding, Output, EventEmitter } from '@angular/core';
-import { DestinoViaje } from "./../models/destino-viaje.models";
+import { DestinoViaje } from "./../../models/destino-viaje.models";
 
 @Component({
   selector: 'app-destino-viaje',

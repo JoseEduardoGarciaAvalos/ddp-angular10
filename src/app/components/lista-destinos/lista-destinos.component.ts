@@ -1,9 +1,9 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { AppState } from '../app.module';
-import { DestinoApiClient } from '../models/destino-api-client-model';
-import { DestinoViaje } from "./../models/destino-viaje.models";
-import  * as NgRx from '../models/destino-viajes-state.model';
+import { AppState } from '../../app.module';
+import { DestinoApiClient } from '../../models/destino-api-client-model';
+import { DestinoViaje } from "./../../models/destino-viaje.models";
+import  * as NgRx from '../../models/destino-viajes-state.model';
 
 @Component({
   selector: 'app-lista-destinos',

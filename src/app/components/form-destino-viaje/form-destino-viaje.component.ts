@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@a
 import { fromEvent } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map, switchMap } from "rxjs/operators";
 import { ajax } from "rxjs/ajax";
-import { DestinoViaje } from '../models/destino-viaje.models';
+import { DestinoViaje } from '../../models/destino-viaje.models';
 
 @Component({
   selector: 'app-form-destino-viaje',
