@@ -3,3 +3,6 @@
     <a [routerLink]="['./',10]">Ir a detalle (Modulo Reserva)</a>
     <a [routerLink]="['/login']">Ir a Login (Modulo Root)</a>
 </div>
+<div *ngFor="let r of api.getAll()">
+    {{r.id}} - {{r.name}}
+</div>
