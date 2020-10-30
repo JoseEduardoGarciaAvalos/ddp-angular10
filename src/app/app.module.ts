@@ -8,7 +8,7 @@ import { DestinoViajeComponent } from './components/destino-viaje/destino-viaje.
 import { ListaDestinosComponent } from './components/lista-destinos/lista-destinos.component';
 import { DestinoDetalleComponent } from './components/destino-detalle/destino-detalle.component';
 import { FormDestinoViajeComponent } from './components/form-destino-viaje/form-destino-viaje.component';
-import { DestinoApiClient } from './models/destino-api-client-model';
+//import { DestinoApiClient } from './models/destino-api-client-model';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import  * as NgRx from './models/destino-viajes-state.model';
@@ -32,7 +32,7 @@ export const childrenVuelos: Routes = [
 const routes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full"},
   { path: "home", component: ListaDestinosComponent},
-  { path: "destino/:id", component: DestinoDetalleComponent},
+  { path: "destino", component: DestinoDetalleComponent},
   { path: "login", component: LoginComponent},
   { path: "protected", component: ProtectedComponent, canActivate: [UsuarioLogueadoGuard]},
   { path: "vuelos", component: VuelosComponent, canActivate: [UsuarioLogueadoGuard],
@@ -72,7 +72,7 @@ export const reducers = {
     EffectsModule.forRoot([NgRx.Effects]),
     ReservasModule
   ],
-  providers: [DestinoApiClient, AuthService, UsuarioLogueadoGuard],
+  providers: [AuthService, UsuarioLogueadoGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
