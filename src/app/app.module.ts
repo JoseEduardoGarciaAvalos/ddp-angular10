@@ -12,6 +12,8 @@ import { DestinoApiClient } from './models/destino-api-client-model';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import  * as NgRx from './models/destino-viajes-state.model';
+import { LoginComponent } from './components/login/login/login.component';
+import { ProtectedComponent } from './components/protected/protected/protected.component';
 
 const routes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full"},
@@ -32,7 +34,9 @@ export const reducers = {
     DestinoViajeComponent,
     ListaDestinosComponent,
     DestinoDetalleComponent,
-    FormDestinoViajeComponent
+    FormDestinoViajeComponent,
+    LoginComponent,
+    ProtectedComponent
   ],
   imports: [
     BrowserModule,
