@@ -20,7 +20,7 @@ export const inicialEstado: Estado = {
 };
 //ACCIONES
 export enum TiposAcciones {
-    INICIAL_DESTINO = '[Destinos Viajes] Voto',
+    INICIAL_DESTINO = '[Destinos Viajes] Inicial',
     NUEVO_DESTINO = '[Destinos Viajes] Nuevo',
     ELIMINA_DESTINO = '[Destinos Viajes] Elimina',
     VOTO_DESTINO = '[Destinos Viajes] Voto',
@@ -59,6 +59,7 @@ export type Acciones = Nuevo | Elimina | Favorito | Voto | Inicial;
 export function reducer(estado = inicialEstado, accion: Acciones): Estado {
     switch (accion.type) {
         case TiposAcciones.INICIAL_DESTINO: {
+            console.log(accion.type)
             const paises: string[] = (accion as Inicial).objetivo;
             return {
                 ...estado,

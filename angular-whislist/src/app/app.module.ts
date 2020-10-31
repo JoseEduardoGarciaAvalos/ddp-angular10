@@ -63,9 +63,11 @@ class AppLoadService {
     const cabecera: HttpHeaders = new HttpHeaders({
       "X-API-TOKEK": "token-seguridad"
     });
-    const req = new HttpRequest("GET", APP_CONFIG_VALUE.apiEndpoint + "/my", {headers: cabecera});
-    const res: any = await this.http.request(req).toPromise();
-    this.store.dispatch(new NgRx.Inicial(res.body));
+    try{
+      const req = new HttpRequest("GET", APP_CONFIG_VALUE.apiEndpoint + "/my", {headers: cabecera});
+      const res: any = await this.http.request(req).toPromise();
+      if(res.body) this.store.dispatch(new NgRx.Inicial(res.body));
+    } catch(e){;}
   }
 }
 
