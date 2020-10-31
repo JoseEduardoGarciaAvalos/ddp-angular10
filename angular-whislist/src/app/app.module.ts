@@ -1,7 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { InjectionToken, NgModule } from '@angular/core';
+import { APP_INITIALIZER, Injectable, InjectionToken, NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { HttpClient, HttpClientModule, HttpHeaders, HttpRequest } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { DestinoViajeComponent } from './components/destino-viaje/destino-viaje.component';
@@ -10,7 +11,7 @@ import { DestinoDetalleComponent } from './components/destino-detalle/destino-de
 import { FormDestinoViajeComponent } from './components/form-destino-viaje/form-destino-viaje.component';
 //import { DestinoApiClient } from './models/destino-api-client-model';
 import { EffectsModule } from '@ngrx/effects';
-import { StoreModule } from '@ngrx/store';
+import { Store, StoreModule } from '@ngrx/store';
 import  * as NgRx from './models/destino-viajes-state.model';
 import { LoginComponent } from './components/login/login/login.component';
 import { ProtectedComponent } from './components/protected/protected/protected.component';
@@ -51,6 +52,24 @@ export const reducers = {
   estado: NgRx.reducer
 };
 
+export function inti_app(appLoadService: AppLoadService): () => Promise<any> {
+  return () => appLoadService.inicializarState();
+}
+
+@Injectable()
+class AppLoadService {
+  constructor(private store: Store<AppState>,  private http: HttpClient) {}
+  async inicializarState(): Promise<any> {
+    const cabecera: HttpHeaders = new HttpHeaders({
+      "X-API-TOKEK": "token-seguridad"
+    });
+    const req = new HttpRequest("GET", APP_CONFIG_VALUE.apiEndpoint + "/my", {headers: cabecera});
+    const res: any = await this.http.request(req).toPromise();
+    this.store.dispatch(new NgRx.Inicial(res.body));
+  }
+}
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -72,10 +91,13 @@ export const reducers = {
     RouterModule.forRoot(routes),
     StoreModule.forRoot(reducers),
     EffectsModule.forRoot([NgRx.Effects]),
-    ReservasModule
+    ReservasModule,
+    HttpClientModule
   ],
   providers: [AuthService, UsuarioLogueadoGuard,
     {provide: APP_CONFIG, useValue: APP_CONFIG_VALUE},
+    AppLoadService,
+    {provide: APP_INITIALIZER, useFactory: inti_app, deps: [AppLoadService], multi: true},
   ],
   bootstrap: [AppComponent]
 })

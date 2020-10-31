@@ -31,14 +31,11 @@ export class ListaDestinosComponent implements OnInit {
 
   // Se ejecuta al dar click en el boton "Guardar" del formulario
   agregado(d: DestinoViaje) {
-    this.store.dispatch(new NgRx.Nuevo(d));
+    this.destinoApiClient.add(d); //Consulta a la API si puede agregarlo, si responde OK entonces lo guarda en el store
   }
 
   // Se ejecuta al dar click en el boton Ir! del componente hijo
   elegido(d:DestinoViaje){
-    console.log("elegido", d)
-    //this.destinoApiClient.elegir(d);
-    //d.setSeleccionado(true);
     this.store.dispatch(new NgRx.Favorito(d));
   }
 

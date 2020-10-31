@@ -1,7 +1,7 @@
 import { Component, Inject, Injectable, InjectionToken, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.module';
-import { DestinoApiClient } from 'src/app/models/destino-api-client-model';
+import { DestinoApiClient, DestinoApiClientV2 } from 'src/app/models/destino-api-client-model';
 import { DestinoViaje } from 'src/app/models/destino-viaje.models';
 
 export class DestinoApiClientViejo {
@@ -20,7 +20,7 @@ const APP_CONFIG_VALUE: AppConfig = {
 const APP_CONFIG = new InjectionToken<AppConfig>("app.config");
 
 @Injectable()
-export class DestinoApiClientDecorated extends DestinoApiClient {
+export class DestinoApiClientDecorated extends DestinoApiClientV2 {
   constructor(@Inject(APP_CONFIG) private config:AppConfig, store: Store<AppState>){
     super(store);
   }

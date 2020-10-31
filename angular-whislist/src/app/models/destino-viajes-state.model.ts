@@ -20,10 +20,16 @@ export const inicialEstado: Estado = {
 };
 //ACCIONES
 export enum TiposAcciones {
+    INICIAL_DESTINO = '[Destinos Viajes] Voto',
     NUEVO_DESTINO = '[Destinos Viajes] Nuevo',
     ELIMINA_DESTINO = '[Destinos Viajes] Elimina',
     VOTO_DESTINO = '[Destinos Viajes] Voto',
     ELEGIDO_FAVORITO = '[Destinos Viajes] Favorito'
+}
+export class Inicial implements Action {
+    type = TiposAcciones.INICIAL_DESTINO;
+
+    constructor(public objetivo: string[]) { }
 }
 
 export class Nuevo implements Action {
@@ -47,11 +53,18 @@ export class Favorito implements Action {
     constructor(public objetivo: DestinoViaje) { }
 }
 
-export type Acciones = Nuevo | Elimina | Favorito | Voto;
+export type Acciones = Nuevo | Elimina | Favorito | Voto | Inicial;
 
 
 export function reducer(estado = inicialEstado, accion: Acciones): Estado {
     switch (accion.type) {
+        case TiposAcciones.INICIAL_DESTINO: {
+            const paises: string[] = (accion as Inicial).objetivo;
+            return {
+                ...estado,
+                destinos: [...estado.destinos, ...paises.map((d) => new DestinoViaje(d,""))]
+            };
+        }
         case TiposAcciones.NUEVO_DESTINO: {
             return {
                 ...estado,
