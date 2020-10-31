@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { APP_INITIALIZER, Injectable, InjectionToken, NgModule } from '@angular/core';
+import { APP_INITIALIZER, Injectable, NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { HttpClient, HttpClientModule, HttpHeaders, HttpRequest } from '@angular/common/http';
@@ -22,7 +22,7 @@ import { VuelosMainComponent } from './components/vuelos/vuelos-main/vuelos-main
 import { VuelosInfoComponent } from './components/vuelos/vuelos-info/vuelos-info.component';
 import { VuelosDetalleComponent } from './components/vuelos/vuelos-detalle/vuelos-detalle.component';
 import { ReservasModule } from './reservas/reservas.module';
-import { APP_CONFIG, APP_CONFIG_VALUE } from './app.config2';
+import { APP_CONFIG, APP_CONFIG_VALUE, MiBaseDatos } from './app.config2';
 
 
 export const childrenVuelos: Routes = [
@@ -69,7 +69,6 @@ class AppLoadService {
   }
 }
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -98,6 +97,7 @@ class AppLoadService {
     {provide: APP_CONFIG, useValue: APP_CONFIG_VALUE},
     AppLoadService,
     {provide: APP_INITIALIZER, useFactory: inti_app, deps: [AppLoadService], multi: true},
+    MiBaseDatos,
   ],
   bootstrap: [AppComponent]
 })
